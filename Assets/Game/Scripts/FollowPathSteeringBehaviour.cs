@@ -7,6 +7,8 @@ public class FollowPathSteeringBehaviour : ArriveSteeringBehaviour
 {
     public float waypointDistance = 0.5f;
     public int currentWaypointIndex = 0;
+    [SerializeField] private GameObject[] points;
+    private int pointIndex = 0;
     private NavMeshPath path;
     private float elapsed = 0.0f;
 
@@ -18,7 +20,20 @@ public class FollowPathSteeringBehaviour : ArriveSteeringBehaviour
 
     public override Vector3 CalculateForce()
     {
-        CheckMouseInput();
+        CheckMouseInput(); //replace with a cycle between points
+
+        if (steeringAgent.reachedGoal)
+        {
+            if (points.Length > 0)
+            {
+                if(pointIndex >= points.Length) 
+                { 
+                    pointIndex = 0;
+                }
+                target = points[pointIndex].transform.position;
+                pointIndex++;
+            }
+        }
         
         if (mouseClicked) 
         { 
