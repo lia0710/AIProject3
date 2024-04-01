@@ -5,7 +5,7 @@ using UnityEngine;
 public class ArriveSteeringBehaviour : SeekSteeringBehaviour
 {
     public float slowDownDistance = 2.0f;
-    public float stoppingDistance = 0.1f;
+    //public float stoppingDistance = 0.1f; //moved to seek
 
     public override Vector3 CalculateForce()
     {

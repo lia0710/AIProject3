@@ -7,7 +7,7 @@ public class ListFollowPathSteeringBehaviour : ArriveSteeringBehaviour
 {
     public float waypointDistance = 0.5f;
     public int currentWaypointIndex = 0;
-    public Vector3[] points;
+    public GameObject[] points;
 
     public override Vector3 CalculateForce()
     {
@@ -17,7 +17,7 @@ public class ListFollowPathSteeringBehaviour : ArriveSteeringBehaviour
         {
             if (points.Length > 0 && currentWaypointIndex == 0)
             {
-                target = points[0];
+                target = points[0].transform.position;
             }
         }
 
@@ -28,13 +28,13 @@ public class ListFollowPathSteeringBehaviour : ArriveSteeringBehaviour
                 currentWaypointIndex++;
                 if (currentWaypointIndex < points.Length)
                 {
-                    target = points[currentWaypointIndex];
+                    target = points[currentWaypointIndex].transform.position;
                 }
             }
             else if (currentWaypointIndex == points.Length)
             {
                 currentWaypointIndex = 0;
-                target = points[currentWaypointIndex];
+                target = points[currentWaypointIndex].transform.position;
             }
         }
         
@@ -50,7 +50,7 @@ public class ListFollowPathSteeringBehaviour : ArriveSteeringBehaviour
         { 
             for(int i = 1; i < points.Length; i++) 
             {
-                Debug.DrawLine(points[i-1], points[i], Color.black);
+                Debug.DrawLine(points[i-1].transform.position, points[i].transform.position, Color.black);
             }
         }
     }

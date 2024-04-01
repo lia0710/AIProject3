@@ -48,6 +48,16 @@ public class SteeringAgent : MonoBehaviour
         }
     }
 
+    public void UpdateSteeringBehaviours()
+    {
+        steeringBehaviours = new List<SteeringBehaviourBase>();
+        steeringBehaviours.AddRange(GetComponentsInChildren<SteeringBehaviourBase>());
+        foreach (SteeringBehaviourBase behaviour in steeringBehaviours)
+        {
+            behaviour.steeringAgent = this;
+        }
+    }
+
     private void OnAnimatorMove()
     {
         if (Time.deltaTime != 0.0f && useRootMotion == true)

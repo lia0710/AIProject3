@@ -19,7 +19,6 @@ public class WanderSteeringBehaviour : SeekSteeringBehaviour
 
     public override Vector3 CalculateForce()
     {
-        //Debug.Log("X:" + wanderTarget.x + " Y:" + wanderTarget.y + " Z:" + wanderTarget.z);
         float wanderJitterTimeSlice = wanderJitter * Time.deltaTime;
         wanderTarget = wanderTarget + new Vector3(Random.Range(-1.0f, 1.0f) * wanderJitterTimeSlice, 
                                                     0.0f, 

@@ -2,21 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SeekSteeringBehaviour : SteeringBehaviourBase
+public class SeekInCircleSteeringBehaviour : SteeringBehaviourBase
 {
     protected Vector3 desiredVelocity;
+    public Vector3 center;
+    public float radius;
     public float stoppingDistance = 0.1f;
 
-    public override Vector3 CalculateForce() 
+    private void Start()
+    { 
+        target = GetRandomCirclePoint();
+    }
+
+    public override Vector3 CalculateForce()
     {
-        CheckMouseInput();
+        //CheckMouseInput();
+
 
         return CalculateSeekForce();
     }
 
+    private Vector3 GetRandomCirclePoint() 
+    {
+        Vector2 point = Random.insideUnitCircle * Random.Range(-radius, radius);
+        point.x += center.x;
+        point.y += center.z;
+        return new Vector3(point.x, 0, point.y);
+    }
+
     protected Vector3 CalculateSeekForce()
     {
-        /*Vector3 toTarget = target - steeringAgent.transform.position;
+        Vector3 toTarget = target - new Vector3(steeringAgent.transform.position.x, 0, steeringAgent.transform.position.z);
+
 
         float distance = toTarget.magnitude;
         steeringAgent.reachedGoal = false;
@@ -25,7 +42,7 @@ public class SeekSteeringBehaviour : SteeringBehaviourBase
         {
             steeringAgent.reachedGoal = true;
             return Vector3.zero;
-        }*/
+        }
 
         desiredVelocity = (target - transform.position).normalized;
         desiredVelocity = desiredVelocity * steeringAgent.maxSpeed;
