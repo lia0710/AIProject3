@@ -14,7 +14,8 @@ public class ArriveSteeringBehaviour : SeekSteeringBehaviour
     }
 
     protected Vector3 CalculateArriveForce() 
-    { 
+    {
+        Debug.Log(target);
         Vector3 toTarget = target - steeringAgent.transform.position;
 
         float distance = toTarget.magnitude;
